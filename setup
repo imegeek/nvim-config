@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+OS=$(uname -o)
+
+ if [[ $1 == "install" ]]
+ then
+   if [[ $OS == *""Android* ]]
+   then
+     update-alternatives --config vi
+     cp -rf $(pwd)/nvim $HOME/.config
+   else
+     cp -rf $(pwd)/nvim $HOME/.config
+     sudo update-alternatives --config vi
+   fi
+ fi
