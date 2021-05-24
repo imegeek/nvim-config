@@ -4,7 +4,7 @@ OS=$(uname -o)
 
  if [[ $1 == "install" ]]
  then
-   if [[ $OS == *""Android* ]]
+   if [[ $OS == *"Android"* ]]
    then
      update-alternatives --config vi
      cp -rf $(pwd)/nvim $HOME/.config

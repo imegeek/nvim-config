@@ -20,7 +20,7 @@ set fillchars=eob:\ ,vert:▎
 set cursorline
 
 " Cursor type underlined
-set guicursor=n-v-c-sm:hor20,i-ci-ve:ver25,r-cr-o:hor20
+" set guicursor=n-v-c-sm:hor20,i-ci-ve:ver25,r-cr-o:hor20
 
 " Always show at least three lines above/below the cursor.
 set scrolloff=3
