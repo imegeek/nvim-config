@@ -2,7 +2,7 @@
 
 OS=$(uname -o)
 
- if ! hash nodejs &> /dev/null
+ if ! hash node &> /dev/null
  then
    printf "Nodejs not Installed :: Install it then run script again.\n"
    exit 1
