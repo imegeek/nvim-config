@@ -12,10 +12,12 @@ OS=$(uname -o)
  then
    if [[ $OS == *"Android"* ]]
    then
-     update-alternatives --config vi
      cp -rf $(pwd)/system/termux/nvim $HOME/.config
+     update-alternatives --config editor
+     update-alternatives --config vi
    else
      cp -rf $(pwd)/system/linux/nvim $HOME/.config
+     sudo update-alternatives --config editor
      sudo update-alternatives --config vi
    fi
  fi
