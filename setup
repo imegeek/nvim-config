@@ -1,6 +1,19 @@
 #!/usr/bin/bash
 
+ST1="system/style/modern"
+ST2="system/style/futuristic"
 OS=$(uname -o)
+
+config() {
+if [[ $OS == *"Android"* ]]
+then
+  update-alternatives --config editor
+  update-alternatives --config vi
+else
+  sudo update-alternatives --config editor
+  sudo update-alternatives --config vi
+fi
+}
 
  if ! hash node &> /dev/null
  then
@@ -10,14 +23,35 @@ OS=$(uname -o)
 
  if [[ $1 == "install" ]]
  then
-   if [[ $OS == *"Android"* ]]
-   then
-     cp -rf $(pwd)/system/termux/nvim $HOME/.config
-     update-alternatives --config editor
-     update-alternatives --config vi
-   else
-     cp -rf $(pwd)/system/linux/nvim $HOME/.config
-     sudo update-alternatives --config editor
-     sudo update-alternatives --config vi
-   fi
- fi
+     if [[ $2 == "style="* ]]
+     then
+       style="${2#style=}"
+     fi
+       if [[ $style == "1" ]]
+       then
+         if [[ $OS == *"Android"* ]]
+         then
+           cp -rf $(pwd)/${ST1}/termux/nvim $HOME/.config
+           config
+         else
+           cp -rf $(pwd)/${ST1}/linux/nvim $HOME/.config
+           config
+         fi
+       elif [[ $style == "2" ]]
+       then
+         if [[ $OS == *"Android"* ]]
+         then
+           cp -rf $(pwd)/${ST2}/termux/nvim $HOME/.config
+           config
+         else
+           cp -rf $(pwd)/${ST2}/linux/nvim $HOME/.config
+           config
+         fi
+       else
+         echo "eg. bash setup install style=1"
+         exit 0
+       fi
+     else
+       echo "eg. bash setup install style=1"
+       exit 0
+     fi
