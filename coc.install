@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+OS=$(uname -o)
+
+config() {
+if [[ $OS == *"Android"* ]]
+then
+if ! hash unzip
+then
+  apt install unzip -y
+fi
+  unzip $(pwd)/archive/neococ.zip
+  cp -rf coc nvim ~/.config
+  echo "Installation complete."
+  rm -rf coc nvim
+else
+  echo "under development."
+fi
+}
+
+config
