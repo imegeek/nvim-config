@@ -12,6 +12,7 @@ then
 fi
   unzip $(pwd)/archive/neococ.zip
   cp -rf coc nvim ~/.config
+  sed -i '461d' ~/.config/nvim/autoload/plugs/coc.nvim/plugin/coc.vim
   echo "Installation complete."
   rm -rf coc nvim
 else
