@@ -4,7 +4,23 @@ ST1="system/style/modern"
 ST2="system/style/futuristic"
 OS=$(uname -o)
 
+coc_config() {
+if ! hash unzip
+then
+   printf "Unzip not Installed :: Install it then run script again.\n"
+fi
+  unzip $(pwd)/archive/neococ.zip
+  mkdir -p ~/.config/nvim/autoload/plugs
+  printf "[\e[92mCopying code server files\e[0m] ..."
+  cp -rf coc.nvim ~/.config/nvim/autoload/plugs
+#  sed -i '461d' ~/.config/nvim/autoload/plugs/coc.nvim/plugin/coc.vim
+  echo "Installation complete."
+  rm -rf coc.nvim
+}
+
+
 config() {
+  printf "[\e[92mSetup 'vi' as a default neovim editor\e[0m]\n\n"
 if [[ $OS == *"Android"* ]]
 then
   update-alternatives --config editor
@@ -13,11 +29,21 @@ else
   sudo update-alternatives --config editor
   sudo update-alternatives --config vi
 fi
+
+coc_config
+# Install some autoindent
+exec nvim -c "CocInstall coc-sh coc-go coc-json coc-clangd coc-css coc-perl coc-python coc-rome coc-rust-analyzer"
 }
 
  if ! hash node &> /dev/null
  then
    printf "Nodejs not Installed :: Install it then run script again.\n"
+   exit 1
+ fi
+
+ if ! hash yarn &> /dev/null
+ then
+   printf "Yarn not Installed :: Install it then run script again.\n"
    exit 1
  fi
 
